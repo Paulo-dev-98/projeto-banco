@@ -16,23 +16,29 @@ public class Cliente implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
+	
 	private String nome;
+	
 	private String sobrenome;
+	
 	private String rg;
+	
 	private String cpf;
+	
 	private String endereco;
+	
 	private Double salario;
 
 	public Cliente() {
 	
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -76,11 +82,11 @@ public class Cliente implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public double getSalario() {
+	public Double getSalario() {
 		return salario;
 	}
 
-	public void setSalario(double salario) {
+	public void setSalario(Double salario) {
 		this.salario = salario;
 	}
 
@@ -90,12 +96,10 @@ public class Cliente implements Serializable {
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(salario);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((salario == null) ? 0 : salario.hashCode());
 		result = prime * result + ((sobrenome == null) ? 0 : sobrenome.hashCode());
 		return result;
 	}
@@ -119,7 +123,10 @@ public class Cliente implements Serializable {
 				return false;
 		} else if (!endereco.equals(other.endereco))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -131,7 +138,10 @@ public class Cliente implements Serializable {
 				return false;
 		} else if (!rg.equals(other.rg))
 			return false;
-		if (Double.doubleToLongBits(salario) != Double.doubleToLongBits(other.salario))
+		if (salario == null) {
+			if (other.salario != null)
+				return false;
+		} else if (!salario.equals(other.salario))
 			return false;
 		if (sobrenome == null) {
 			if (other.sobrenome != null)

@@ -1,35 +1,37 @@
 package com.banco.model.dto;
 
-public class ClienteDTO {
+import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({"id", "nome", "sobrenome", "rg", "cpf", "endereco", "salario"})
+public class ClienteDTO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
-	private Integer id;
+	private Long id;
+	
 	private String nome;
+	
 	private String sobrenome;
+	
 	private String rg;
+	
 	private String cpf;
+	
 	private String endereco;
+	
 	private Double salario;
 	
 	public ClienteDTO() {
 		
 	}
 
-	public ClienteDTO(Integer id, String nome, String sobrenome, String rg, String cpf, String endereco,
-			Double salario) {
-		this.id = id;
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.rg = rg;
-		this.cpf = cpf;
-		this.endereco = endereco;
-		this.salario = salario;
-	}
-
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

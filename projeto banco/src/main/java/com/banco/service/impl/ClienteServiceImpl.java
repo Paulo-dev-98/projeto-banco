@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.banco.mapper.ClienteMapper;
+import com.banco.model.Cliente;
 import com.banco.model.dto.ClienteDTO;
 import com.banco.repository.ClienteRepository;
 import com.banco.service.ClienteService;
@@ -27,4 +28,9 @@ public class ClienteServiceImpl implements ClienteService {
 		       .collect(Collectors.toList());
 	}	
 
+	@Override
+	public ClienteDTO salvarCliente(ClienteDTO clienteDTO) {
+		Cliente cliente = clienteRepository.save(clienteMapper.toEntity(clienteDTO));
+		return clienteMapper.toDTO(cliente);
+	}
 }
