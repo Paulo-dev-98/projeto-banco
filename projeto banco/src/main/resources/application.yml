@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    useTimezone : true&serverTimezone=America/Sao_Paulo
+    url: jdbc:mysql://localhost:3306/cliente
+    username: root
+    password: root1234
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
