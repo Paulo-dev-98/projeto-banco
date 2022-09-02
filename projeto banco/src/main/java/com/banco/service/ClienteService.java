@@ -8,4 +8,5 @@ public interface ClienteService {
 	List<ClienteDTO> bustarTodosClientes();
 	ClienteDTO salvarCliente(ClienteDTO clienteDTO);
 	ClienteDTO atualizarCliente(ClienteDTO clienteDTO);
+	void deletarCliente(Long id);
 }

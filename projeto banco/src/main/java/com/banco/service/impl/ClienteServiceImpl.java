@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.banco.exception.ResourceNotFoundException;
 import com.banco.mapper.ClienteMapper;
 import com.banco.model.Cliente;
 import com.banco.model.dto.ClienteDTO;
@@ -38,5 +39,12 @@ public class ClienteServiceImpl implements ClienteService {
 	public ClienteDTO atualizarCliente(ClienteDTO clienteDTO) {
 		Cliente cliente = clienteRepository.save(clienteMapper.toEntity(clienteDTO));
 		return clienteMapper.toDTO(cliente);
+	}
+	
+	@Override
+	public void deletarCliente(Long id) {
+	  Cliente cliente = clienteRepository.findById(id)
+			  .orElseThrow(() -> new ResourceNotFoundException("id não encontrado"));
+	   clienteRepository.delete(cliente);
 	}
 }
