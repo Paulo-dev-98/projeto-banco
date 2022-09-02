@@ -28,17 +28,24 @@ public class ClienteController {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
-	@GetMapping("/all")
+	@GetMapping(value = "/all", produces = {"application/json", "application/xml"})
 	public ResponseEntity<List<ClienteDTO>>buscarTodosClientes(){
 		return ResponseEntity.ok(clienteService.bustarTodosClientes());
 	}
 	
-	@PostMapping
+	@GetMapping(value = "/{id}", produces = {"application/json", "application/xml"})
+	public ResponseEntity<ClienteDTO> buscarClientePorId(@PathVariable("id") Long id){
+		return ResponseEntity.ok(clienteService.buscarClientePorId(id));
+	}
+	
+	@PostMapping(produces = {"application/json", "application/xml"},
+			     consumes = {"application/json", "application/xml"})
 	public ResponseEntity<ClienteDTO>salvarCliente(@RequestBody ClienteDTO clienteDTO){
 		return ResponseEntity.ok(clienteService.salvarCliente(clienteDTO));
 	}
 	
-	@PutMapping("/update")
+	@PutMapping(value = "/update", produces = {"application/json", "application/xml"},
+			    consumes = {"application/json", "application/xml"})
 	public ResponseEntity<ClienteDTO>atualizarCliente(@RequestBody ClienteDTO clienteDTO){
         return ResponseEntity.ok(clienteService.atualizarCliente(clienteDTO));
 	}

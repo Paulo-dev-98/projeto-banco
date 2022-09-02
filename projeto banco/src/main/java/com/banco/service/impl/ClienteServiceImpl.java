@@ -27,7 +27,17 @@ public class ClienteServiceImpl implements ClienteService {
 			   .stream()
 			   .map(e -> clienteMapper.toDTO(e))
 		       .collect(Collectors.toList());
-	}	
+	}
+	
+	@Override
+	public ClienteDTO buscarClientePorId(Long id) {
+		try {
+			Cliente cliente = clienteRepository.findById(id).get();
+			return clienteMapper.toDTO(cliente);
+		} catch (Exception e) {
+			throw new RuntimeException("id não encontrado");
+		}
+	}
 
 	@Override
 	public ClienteDTO salvarCliente(ClienteDTO clienteDTO) {
