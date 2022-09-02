@@ -33,4 +33,10 @@ public class ClienteServiceImpl implements ClienteService {
 		Cliente cliente = clienteRepository.save(clienteMapper.toEntity(clienteDTO));
 		return clienteMapper.toDTO(cliente);
 	}
+	
+	@Override
+	public ClienteDTO atualizarCliente(ClienteDTO clienteDTO) {
+		Cliente cliente = clienteRepository.save(clienteMapper.toEntity(clienteDTO));
+		return clienteMapper.toDTO(cliente);
+	}
 }

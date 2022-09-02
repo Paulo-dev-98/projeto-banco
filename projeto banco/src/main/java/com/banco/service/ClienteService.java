@@ -7,4 +7,5 @@ import com.banco.model.dto.ClienteDTO;
 public interface ClienteService {
 	List<ClienteDTO> bustarTodosClientes();
 	ClienteDTO salvarCliente(ClienteDTO clienteDTO);
+	ClienteDTO atualizarCliente(ClienteDTO clienteDTO);
 }
