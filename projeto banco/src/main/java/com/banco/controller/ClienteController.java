@@ -52,8 +52,10 @@ public class ClienteController {
 	
 	@PutMapping(value = "/update", produces = {"application/json", "application/xml"},
 			    consumes = {"application/json", "application/xml"})
-	public ResponseEntity<ClienteResponseDTO>atualizarCliente(@RequestBody ClienteResponseDTO clienteDTO){
-        return ResponseEntity.ok(clienteService.atualizarCliente(clienteDTO));
+	public ResponseEntity<ClienteResponseDTO>atualizarCliente(@RequestBody ClienteRequestDTO clienteRequestDTO){
+		Cliente updateCliente = clienteService.atualizarCliente(clienteMapper.toEntity(clienteRequestDTO));
+		ClienteResponseDTO clienteResponseDTO = clienteMapper.toDTO(updateCliente);
+        return ResponseEntity.ok(clienteResponseDTO);
 	}
 	
 	@DeleteMapping("/delete/{id}")

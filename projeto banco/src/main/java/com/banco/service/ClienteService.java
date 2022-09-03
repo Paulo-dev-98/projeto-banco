@@ -9,6 +9,6 @@ public interface ClienteService {
 	List<ClienteResponseDTO> bustarTodosClientes();
 	ClienteResponseDTO buscarClientePorId(Long id);
 	Cliente salvarCliente(Cliente cliente);
-	ClienteResponseDTO atualizarCliente(ClienteResponseDTO clienteDTO);
+	Cliente atualizarCliente(Cliente cliente);
 	void deletarCliente(Long id);
 }

@@ -48,9 +48,10 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 	
 	@Override
-	public ClienteResponseDTO atualizarCliente(ClienteResponseDTO clienteDTO) {
-		Cliente cliente = clienteRepository.save(clienteMapper.toEntity(clienteDTO));
-		return clienteMapper.toDTO(cliente);
+	public Cliente atualizarCliente(Cliente cliente) {
+		validarDados(cliente.getCpf(), cliente.getRg());
+		Cliente updateCliente = clienteRepository.save(cliente);
+		return updateCliente;
 	}
 	
 	@Override
@@ -63,6 +64,9 @@ public class ClienteServiceImpl implements ClienteService {
 	private void validarDados(String cpf, String rg) {
 		if(clienteRepository.existsByCpf(cpf)) {
 			throw new ExceptionPersonalizada("erro", "cpf ja cadastrado");
+		}
+		if(clienteRepository.existsByRg(rg)) {
+			throw new ExceptionPersonalizada("erro", "rg ja cadastrado");
 		}
 	}
 }
