@@ -1,24 +1,13 @@
-package com.banco.model;
+package com.banco.model.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.hibernate.validator.constraints.br.CPF;
-
-@Entity
-@Table(name = "cliente")
-public class Cliente implements Serializable {
+@JsonPropertyOrder({"nome", "sobrenome", "rg", "cpf", "endereco", "salario"})
+public class ClienteRequestDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 	
 	private String nome;
 	
@@ -26,23 +15,14 @@ public class Cliente implements Serializable {
 	
 	private String rg;
 	
-	@CPF(message = "Cpf Invalido")
 	private String cpf;
 	
 	private String endereco;
 	
 	private Double salario;
-
-	public Cliente() {
 	
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public ClienteRequestDTO() {
+		
 	}
 
 	public String getNome() {
@@ -92,5 +72,5 @@ public class Cliente implements Serializable {
 	public void setSalario(Double salario) {
 		this.salario = salario;
 	}
-	
+
 }

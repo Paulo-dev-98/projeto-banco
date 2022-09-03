@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.banco.exception.ResourceNotFoundException;
+import com.banco.mapper.ClienteMapper;
 import com.banco.model.Cliente;
-import com.banco.model.dto.ClienteDTO;
+import com.banco.model.dto.ClienteResponseDTO;
+import com.banco.model.dto.ClienteRequestDTO;
 import com.banco.repository.ClienteRepository;
 import com.banco.service.ClienteService;
 
@@ -27,26 +29,30 @@ public class ClienteController {
 	private ClienteService clienteService;
 	@Autowired
 	private ClienteRepository clienteRepository;
+	@Autowired
+	private ClienteMapper clienteMapper;
 	
 	@GetMapping(value = "/all", produces = {"application/json", "application/xml"})
-	public ResponseEntity<List<ClienteDTO>>buscarTodosClientes(){
+	public ResponseEntity<List<ClienteResponseDTO>>buscarTodosClientes(){
 		return ResponseEntity.ok(clienteService.bustarTodosClientes());
 	}
 	
 	@GetMapping(value = "/{id}", produces = {"application/json", "application/xml"})
-	public ResponseEntity<ClienteDTO> buscarClientePorId(@PathVariable("id") Long id){
+	public ResponseEntity<ClienteResponseDTO> buscarClientePorId(@PathVariable("id") Long id){
 		return ResponseEntity.ok(clienteService.buscarClientePorId(id));
 	}
 	
 	@PostMapping(produces = {"application/json", "application/xml"},
 			     consumes = {"application/json", "application/xml"})
-	public ResponseEntity<ClienteDTO>salvarCliente(@RequestBody ClienteDTO clienteDTO){
-		return ResponseEntity.ok(clienteService.salvarCliente(clienteDTO));
+	public ResponseEntity<ClienteResponseDTO>salvarCliente(@RequestBody ClienteRequestDTO clienteRequestDTO){
+		Cliente newCliente = clienteService.salvarCliente(clienteMapper.toEntity(clienteRequestDTO));
+		ClienteResponseDTO clienteResponseDTO = clienteMapper.toDTO(newCliente);
+		return ResponseEntity.ok(clienteResponseDTO);
 	}
 	
 	@PutMapping(value = "/update", produces = {"application/json", "application/xml"},
 			    consumes = {"application/json", "application/xml"})
-	public ResponseEntity<ClienteDTO>atualizarCliente(@RequestBody ClienteDTO clienteDTO){
+	public ResponseEntity<ClienteResponseDTO>atualizarCliente(@RequestBody ClienteResponseDTO clienteDTO){
         return ResponseEntity.ok(clienteService.atualizarCliente(clienteDTO));
 	}
 	

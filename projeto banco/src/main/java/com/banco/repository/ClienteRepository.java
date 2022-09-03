@@ -7,5 +7,5 @@ import com.banco.model.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-
+	boolean existsByCpf(String cpf);
 }

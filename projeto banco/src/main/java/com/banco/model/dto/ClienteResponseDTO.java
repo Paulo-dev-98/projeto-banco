@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({"id", "nome", "sobrenome", "rg", "cpf", "endereco", "salario"})
-public class ClienteDTO implements Serializable {
+public class ClienteResponseDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -23,7 +23,7 @@ public class ClienteDTO implements Serializable {
 	
 	private Double salario;
 	
-	public ClienteDTO() {
+	public ClienteResponseDTO() {
 		
 	}
 
